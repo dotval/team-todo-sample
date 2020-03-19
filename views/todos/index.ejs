@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Todoリスト</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
     <link rel="stylesheet" href="https://fezvrasta.github.io/bootstrap-material-design/docs/4.0/examples/offcanvas/offcanvas.css">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                     <label for="todoContent" class="bmd-label-floating">タスク詳細</label>
-                    <textarea id="todoContentTextarea" name="todoContent" type="text" class="form-control" rows="3"></textarea>
+                    <textarea id="todoContent" name="todoContent" type="text" class="form-control" rows="3"></textarea>
                 </div>
                 <button id="clearFormButton" class="btn btn-default">クリア</button>
                 <button id="addTodoButton" type="submit" class="btn btn-primary btn-raised">投稿</button>
@@ -43,7 +43,7 @@
                         </p>
                         <form action="/todos/<%= todo.id %>" method="post">
                             <input type="hidden" name="_method" value="delete">
-                            <input type="submit" value="完了" class="btn btn-primary btn-raised">
+                            <input type="submit" value="完了" class="complete-button btn btn-primary btn-raised">
                         </form>
                     </li>
                 <% }) %>
@@ -75,5 +75,6 @@
         </div>
     </div>
     <script src="/jquery/jquery.js"></script>
+    <script src="/public/javascripts/script.js"></script>
 </body>
 </html>
