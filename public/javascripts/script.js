@@ -7,10 +7,12 @@ $(function(){
     $('#modal').fadeOut();
   });
 
+  const titleVal = $('#todoTitle').val();
+  const contentVal = $('#todoContent').val();
   // ToDo追加フォームの内容のクリア
   $('#clearFormButton').click(function() {
-    $('#todoTitle').val('');
-    $('#todoContent').val('');
+    $('#todoTitle').val(titleVal);
+    $('#todoContent').val(contentVal);
     return false;
   });
 
