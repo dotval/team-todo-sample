@@ -1,53 +1,58 @@
+const db = require('../models/index');
 // 一覧表示
 exports.index = (req, res) => {
-  connection.query(
-    'SELECT * FROM todos',
-    (error, results) => {
-      res.render('todos/index.ejs', { todos: results } );
-    }
-  );
+  db.todo.findAll({}).then((results) => {
+    res.render('todos/index.ejs', {todos: results} );
+  });
+};
+
+// 個別表示
+exports.show = (req, res) => {
+  db.todo.findByPk(req.params.id).then((results) => {
+    res.render('todos/show.ejs', {todo: results} );
+  });
 };
 
 // 新規作成
 exports.create = (req, res) => {
-  connection.query(
-    'INSERT INTO todos (content) VALUE (?)',
-    [req.body.todoContent],
-    (error, results) => {
-      res.redirect('/');
-    }
-  );
-};
+  const param = {
+    content: req.body.todoContent
+  };
+  db.todo.create(param).then((results) => {
+    res.redirect('/');
+  });
+}
 
 // 編集
 exports.edit =  (req, res) => {
-  connection.query(
-    'SELECT * FROM todos WHERE id = ?',
-    [req.params.id],
-    (error, results) => {
-      res.render('todos/edit.ejs', {todo: results[0]} );
-    }
-  );
+  db.todo.findByPk(req.params.id).then((results) => {
+    res.render('todos/edit.ejs', {todo: results} );
+  });
 };
 
 // 更新
 exports.update = (req, res) => {
-  connection.query(
-    'UPDATE todos SET content = ? WHERE id = ?',
-    [req.body.todoContent, req.params.id],
-    (error, results) => {
-      res.redirect('/');
+  const param = {
+    content: req.body.todoContent
+  };
+  const filter = {
+    where: {
+      id: req.params.id
     }
-  );
+  };
+  db.todo.update(param, filter).then((results) => {
+    res.redirect('/');
+  });
 };
 
 // 削除
 exports.delete = (req, res) => {
-  connection.query(
-    'DELETE FROM todos WHERE id = ?',
-    [req.params.id],
-    (error, results) => {
-      res.redirect('/');
+  const filter = {
+    where: {
+      id: req.params.id
     }
-  );
+  };
+  db.todo.destroy(filter).then((results) => {
+    res.redirect('/');
+  });
 };
