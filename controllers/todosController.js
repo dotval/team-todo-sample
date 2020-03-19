@@ -1,7 +1,10 @@
 const db = require('../models/index');
 // 一覧表示
 exports.index = (req, res) => {
-  db.todo.findAll({}).then((results) => {
+  const options = {
+    order: [['updatedAt', 'DESC']]
+  };
+  db.todo.findAll(options).then((results) => {
     res.render('todos/index.ejs', {todos: results} );
   });
 };
