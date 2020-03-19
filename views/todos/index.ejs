@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todoリスト</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
-    <link rel="stylesheet" href="https://fezvrasta.github.io/bootstrap-material-design/docs/4.0/examples/offcanvas/offcanvas.css">
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
-</head>
-<body>
+<%- partial('partials/header.ejs') %>
     <main role="main" class="container pt-5">
         <div class="jumbotron">
             <h3>ToDo登録</h3>
@@ -41,10 +31,13 @@
                             <strong class="d-block text-gray-dark pb-1"><%= todo.title %></strong>
                             <%= todo.content %>
                         </p>
-                        <form action="/todos/<%= todo.id %>" method="post">
-                            <input type="hidden" name="_method" value="delete">
-                            <input type="submit" value="完了" class="complete-button btn btn-primary btn-raised">
-                        </form>
+                        <div class="ml-3">
+                            <a href="/todos/<%= todo.id %>/edit" class="btn btn-sm btn-raised">編集</a>
+                            <form action="/todos/<%= todo.id %>" method="post">
+                                <input type="hidden" name="_method" value="delete">
+                                <input type="submit" value="完了" class="complete-button btn btn-sm btn-primary btn-raised">
+                            </form>
+                        </div>
                     </li>
                 <% }) %>
             </ul>
@@ -74,7 +67,4 @@
             </div>
         </div>
     </div>
-    <script src="/jquery/jquery.js"></script>
-    <script src="/public/javascripts/script.js"></script>
-</body>
-</html>
+<%- partial('partials/footer.ejs') %>
