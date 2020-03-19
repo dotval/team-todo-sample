@@ -1,6 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const todo = sequelize.define('todo', {
+    title: DataTypes.STRING,
     content: DataTypes.STRING
   }, {});
   todo.associate = function(models) {

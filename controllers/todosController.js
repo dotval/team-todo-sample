@@ -16,6 +16,7 @@ exports.show = (req, res) => {
 // 新規作成
 exports.create = (req, res) => {
   const param = {
+    title: req.body.todoTitle,
     content: req.body.todoContent
   };
   db.todo.create(param).then((results) => {

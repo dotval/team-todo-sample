@@ -4,23 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link rel="stylesheet" href="https://fezvrasta.github.io/bootstrap-material-design/docs/4.0/examples/offcanvas/offcanvas.css">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
 </head>
 <body>
-    <h1>Todoリスト</h1>
-    <form action="/todos/" method="post">
-        <input type="text" name="todoContent">
-        <input type="submit" value="作成">
-    </form>
-    <ul>
-        <% todos.map((todo) => { %>
-            <li><%= todo.content %></li>
-            <a href="/todos/<%= todo.id %>">詳細</a>
-            <a href="/todos/<%= todo.id %>/edit">編集</a>
-            <form action="/todos/<%= todo.id %>" method="post">
-                <input type="hidden" name="_method" value="delete">
-                <input type="submit" value="削除">
+    <main role="main" class="container pt-5">
+        <div class="jumbotron">
+            <h3>ToDo登録</h3>
+            <form action="/todos/" method="post">
+                <div class="form-group">
+                    <label for="todoTitle" class="bmd-label-floating">タスク名</label>
+                    <input id="todoTitle" name="todoTitle" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="todoContent" class="bmd-label-floating">タスク詳細</label>
+                    <textarea id="todoContentTextarea" name="todoContent" type="text" class="form-control" rows="3"></textarea>
+                </div>
+                <button id="clearFormButton" class="btn btn-default">クリア</button>
+                <button id="addTodoButton" type="submit" class="btn btn-primary btn-raised">投稿</button>
             </form>
-        <% }) %> 
-    </ul>
+        </div>
+
+        <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
+            <div class="lh-100">
+                <h6 class="mb-0 text-white lh-100">ToDoリスト</h6>
+            </div>
+        </div>
+
+        <div class="my-3 p-3 bg-white rounded box-shadow">
+            <h6 class="border-bottom border-gray pb-2 mb-0">最新のToDo</h6>
+            <ul id="todoList">
+                <% todos.map((todo) => { %>
+                    <li class="text-muted pt-3 d-flex align-items-center justify-content-between">
+                        <p class="pb-3 mb-0 small lh-125 border-bottom border-gray">
+                            <strong class="d-block text-gray-dark pb-1"><%= todo.title %></strong>
+                            <%= todo.content %>
+                        </p>
+                        <form action="/todos/<%= todo.id %>" method="post">
+                            <input type="hidden" name="_method" value="delete">
+                            <input type="submit" value="完了" class="btn btn-primary btn-raised">
+                        </form>
+                    </li>
+                <% }) %>
+            </ul>
+        </div>
+    </main>
+
+    <div id="modal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">有料登録しませんか？</h5>
+                    <button type="button" class="close">
+                        <span class="closeModalButton" aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>このサービスに登録するとこんな機能が追加されます。</p>
+                    <ul>
+                        <li>タスクの編集機能</li>
+                        <li>期限通知機能</li>
+                        <li>他サービスとの連携</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="closeModalButton btn btn-primary">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
