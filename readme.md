@@ -8,7 +8,7 @@
 $ git clone https://github.com/gs-create/team-todo-sample.git
 $ cd team-todo-sample
 $ npm install
-$ sequelize db:create
-$ sequelize db:migrate
+$ npx sequelize db:create
+$ npx sequelize db:migrate
 $ npm start
 ```
