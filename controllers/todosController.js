@@ -37,8 +37,8 @@ exports.edit =  (req, res) => {
 // 更新
 exports.update = (req, res) => {
   const param = {
-    title: req.body.todoTitle,
-    content: req.body.todoContent
+    title: req.params.todoTitle,
+    content: req.params.todoContent
   };
   const filter = {
     where: {
