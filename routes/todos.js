@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const todosController = require('../controllers/todosController');
+const todosController = require('../controllers/todosControllers');
 
 // 一覧表示
 router.get('/', (req, res) => {
