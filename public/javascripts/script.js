@@ -4,7 +4,7 @@ $(function(){
     $('#modal').fadeIn();
   }, 5000);
   $('.closeModalButton').click(function() {
-    $('#modal').fadeOut();
+    $('.modal-dialog').fadeOut();
   });
 
   const titleVal = $('#todoTitle').val();
